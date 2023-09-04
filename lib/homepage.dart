@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   List reciptCatList = [{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"}];
   getRecipes(String query) async {
     String url =
-        "https://api.edamam.com/search?q=$query&app_id=ebb6041c&app_key=3c33ad913ab23b8554082bfb5fdd78b5";
+        "https://api.edamam.com/search?q=$query&app_id=d6514d39&app_key=40431e11d35ff909597ab69b1b0e04f9";
     Response response = await get(Uri.parse(url));
     Map data = jsonDecode(response.body);
     setState(() {
