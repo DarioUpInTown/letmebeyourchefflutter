@@ -3,15 +3,18 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'RecipeView.dart';
 import 'model.dart';
-import 'search.dart';
 import 'package:http/http.dart';
 
-class Home extends StatefulWidget {
+
+class Search extends StatefulWidget {
+  String query;
+  Search(this.query);
+
   @override
-  _HomeState createState() => _HomeState();
+  _SearchState createState() => _SearchState();
 }
 
-class _HomeState extends State<Home> {
+class _SearchState extends State<Search> {
 
   bool isLoading = true;
   List<RecipeModel> recipeList = <RecipeModel>[];
@@ -44,7 +47,7 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getRecipes("Ladoo");
+    getRecipes(widget.query);
   }
   @override
   Widget build(BuildContext context) {
@@ -100,7 +103,7 @@ class _HomeState extends State<Home> {
                                 "") {
                               print("Blank search");
                             } else {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Search(searchController.text)));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Search(searchController.text)));
                             }
                           },
                           child: Container(
@@ -114,6 +117,7 @@ class _HomeState extends State<Home> {
                         Expanded(
                           child: TextField(
                             controller: searchController,
+
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Let's Cook Something!"),
@@ -123,25 +127,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "WHAT DO YOU WANT TO COOK TODAY?",
-                        style: TextStyle(fontSize: 33, color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Let's Cook Something New!",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
+
                 Container(
                     child: isLoading ? CircularProgressIndicator() : ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -211,60 +197,6 @@ class _HomeState extends State<Home> {
                           );
                         })),
 
-                Container(
-                  height: 100,
-                  child: ListView.builder( itemCount: reciptCatList.length, shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index){
-
-                        return Container(
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Search(reciptCatList[index]["heading"])));
-                              },
-                              child: Card(
-                                  margin: EdgeInsets.all(20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  elevation: 0.0,
-                                  child:Stack(
-                                    children: [
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(18.0),
-                                          child: Image.network(reciptCatList[index]["imgUrl"], fit: BoxFit.cover,
-                                            width: 200,
-                                            height: 250,)
-                                      ),
-                                      Positioned(
-                                          left: 0,
-                                          right: 0,
-                                          bottom: 0,
-                                          top: 0,
-                                          child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 5, horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                  color: Colors.black26),
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    reciptCatList[index]["heading"],
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 28),
-                                                  ),
-                                                ],
-                                              ))),
-                                    ],
-                                  )
-                              ),
-                            )
-                        );
-                      }),
-                )
-
 
 
 
@@ -280,3 +212,4 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
