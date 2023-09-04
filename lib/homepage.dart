@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:letmebeyourchefflutter/homepage.dart';
 import 'package:letmebeyourchefflutter/model.dart';
 
 class Home extends StatefulWidget{
@@ -60,13 +61,16 @@ class _HomeState extends State<Home>{
                 )
               ),
             ),
-            SingleChildScrollView(
+
+
+
+          /*  SingleChildScrollView(
                child: Column(
                  children: [
                  ],
                ),
             ),
-
+*/
           ),
 
           Container(
@@ -91,19 +95,81 @@ class _HomeState extends State<Home>{
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 12,
+                itemCount: recipeList.length,
                 itemBuilder: (context, index){
-              return MyText();
-            }),
-          )
+              return InkWell(
+                onTap: (){},
+                child: Card(
+                  margin: EdgeInsets.all(10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 0.0,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius : BorderRadius.circular(10.0),
+                        child: Image.network(
+
+                          recipeList[index].appimgUrl,
+                        fit : BoxFit.cover,
+                        width: double.infinity,
+                        height: 200,)
+                      ),
+                      Positioned(
+                        left : 0,
+                          right: 0,
+
+                          bottom : 0,
+                          child:
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.black26
+                              ),
+                              child: Text(
+                                  recipeList[0].applabel,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20),
+    ))),
+                Positioned(
+                    right: 0,
+                    height: 40,
+                      width: 80,
+                      child: Container(
+                        decoration: BoxDecoration(
+                        color:Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10)
+                        ),
+                        ),
+
+                        child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.local_fire_department, size:13),
+                            Text(recipeList[index].appcalories.toString().substring(0,6))
+                        ],
+                        ),
+                      ),
+                      ),
+                    ),
+                          ),
+                      );
+                    ],
+                  )
+                ),
+              );
+            },),
+          ),
 
         ],
 
       ),
 
-    );
-  }
-}
-Widget MyText(){
-  Text("My Text");
+    ),
+  },
 }
