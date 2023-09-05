@@ -60,25 +60,7 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          /*
-      * InWell - Tap,DoubleTaP,etc.
-      * Gesture Detector
-      *
-      * Hover - Color
-      * Tap - Splash
-      *
-      * Getsure -
-      * Swipe,'
-      *
-      * Card - elevation background color,radius child
-      *
-      * ClipRRect - Frame - Photo Rectangle
-      *
-      * ClipPath - Custom CLips
-      *
-      * positioned  - Stack - topleft , top,down,left - 2.2
-      *
-      * */
+
           SingleChildScrollView(
             child: Column(
               children: [
