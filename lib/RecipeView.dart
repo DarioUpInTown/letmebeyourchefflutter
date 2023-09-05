@@ -28,7 +28,7 @@ class _RecipeViewState extends State<RecipeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Food Recipe App"),
+        title: Text("LetMeBeYourChef!"),
       ),
       body: Container(
         child: WebView(
