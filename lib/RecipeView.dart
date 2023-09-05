@@ -33,7 +33,7 @@ class _RecipeViewState extends State<RecipeView> {
       body: Container(
         child: WebView(
           initialUrl: finalUrl,
-          javascriptMode: JavaScriptMode.unrestricted,
+          javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController){
             setState(() {
               controller.complete(webViewController);
