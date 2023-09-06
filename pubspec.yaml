@@ -1,5 +1,5 @@
-name: letmebeyourchefflutter
-description: A new Flutter project.
+name: LetMeBeYourChefFlutter
+description: LetMeBeYourChef!
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -30,17 +30,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  sqflite:
+  path:
+  form_field_validator: ^1.0.1
+  percent_indicator: ^4.0.1
+  video_player:
+  fluttertoast: ^8.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http:
   webview_flutter: ^3.0.4
+  cloud_firestore: ^4.0.3
+  firebase_auth: ^4.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -51,6 +59,11 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -64,7 +77,10 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/videos/videoapp.mp4
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
