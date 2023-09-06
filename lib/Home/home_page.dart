@@ -106,17 +106,6 @@ class HomePageState extends State<HomePage> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
     final docUtente = FirebaseFirestore.instance.collection('utenti').doc(email);
     final snapshot= await docUtente.get();
