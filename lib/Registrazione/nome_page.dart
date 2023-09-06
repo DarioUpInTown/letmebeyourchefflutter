@@ -14,7 +14,7 @@ class NomePage extends StatefulWidget {
 class NomePageState extends State<NomePage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  Utente utente= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', altezza: 0, peso: 0, eta: 0, kcal: 0, carbo: 0, grassi: 0, proteine: 0);
+  Utente utente= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', eta: 0);
   final nomeController = TextEditingController();
   final cognomeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();

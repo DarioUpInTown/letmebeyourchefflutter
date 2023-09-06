@@ -17,19 +17,15 @@ class ProfiloPageState extends State<ProfiloPage> {
   final cognomeController = TextEditingController();
   final emailController = TextEditingController();
   final etaController = TextEditingController();        //controller form
-  final altezzaController = TextEditingController();
-  final pesoController = TextEditingController();
   late String email='';
   late String nome='';
   late String cognome='';
   late String data='';
   late String stile='';
   late String genere='';
-  late double altezza=0;
   late int eta=0;
-  late double peso=0;
   late Utente? utente=null;
-  Utente utenteMod= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', altezza: 0, peso: 0, eta: 0, kcal: 0, carbo: 0, grassi: 0, proteine: 0);
+  Utente utenteMod= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', eta: 0);
   final List<String> genderItems = [
     'Uomo',               //lista dropdown button sesso
     'Donna',
@@ -86,8 +82,6 @@ class ProfiloPageState extends State<ProfiloPage> {
                 etaController.text = utente!.eta.toString();          //inizializzo le form con i dati dell'utente
                 stile = utente!.stile;
                 genere = utente!.sesso;
-                altezzaController.text = utente!.altezza.toString();
-                pesoController.text = utente!.peso.toString();
                   return Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: ListView(
@@ -290,7 +284,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                 ),
                               ),
                             ),
-                            Expanded(
+                            /*Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
                                 child: TextFormField(
@@ -333,7 +327,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                   ),
                                 ),
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
 
@@ -365,7 +359,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                       content: Text("Inserisci un cognome"),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  }else{
+                                  }else/*{
                                     if(altezzaController.text=='' || (int.parse(altezzaController.text)>200 || int.parse(altezzaController.text)<130)){
                                       const snackBar = SnackBar(
                                         content: Text("Inserisci un'altezza tra 130 e 200 cm"),
@@ -377,7 +371,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           content: Text("Inserisci un peso tra 40 e 200 kg"),
                                         );
                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                      }else{
+                                      }else*/{
                                         if(etaController.text=="" || (int.parse(etaController.text)>90 || int.parse(etaController.text)<16)){
                                           const snackBar = SnackBar(
                                             content: Text("Inserisci un eta tra 16 e 90 anni"),
@@ -387,46 +381,10 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           utenteMod.nome = nomeController.text;
                                           utenteMod.cognome= cognomeController.text;
                                           utenteMod.eta= int.parse(etaController.text);
-                                          utenteMod.peso= double.parse(pesoController.text);        //se valide ricalcolo kcal e nutrienti in base ai dati forniti
-                                          utenteMod.altezza= int.parse(altezzaController.text);
+                                          //utenteMod.peso= double.parse(pesoController.text);        //se valide ricalcolo kcal e nutrienti in base ai dati forniti
+                                          //utenteMod.altezza= int.parse(altezzaController.text);
                                           utenteMod.sesso=genere;
                                           utenteMod.stile=stile;
-                                          if(utenteMod.sesso=='Uomo'){
-                                            utenteMod.kcal = ((66.5 + (13.8*utenteMod.peso) + (5*utenteMod.altezza)) - (6.8*utenteMod.eta)).toInt();
-                                            switch(utenteMod.stile){
-                                              case 'Sedentario':
-                                                utenteMod.kcal = (utenteMod.kcal*1.2).toInt();
-                                                break;
-                                              case 'Poco Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.3).toInt();
-                                                break;
-                                              case 'Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.4).toInt();
-                                                break;
-                                              case 'Molto Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.5).toInt();
-                                                break;
-                                            }
-                                          }else{
-                                            utenteMod.kcal =  ((65.1 + (10.6*utenteMod.peso) + (4.5*utenteMod.altezza)) - (4.7*utenteMod.eta)).toInt();
-                                            switch(utenteMod.stile){
-                                              case 'Sedentario':
-                                                utenteMod.kcal = (utenteMod.kcal*1.2).toInt();
-                                                break;
-                                              case 'Poco Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.3).toInt();
-                                                break;
-                                              case 'Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.4).toInt();
-                                                break;
-                                              case 'Molto Attivo':
-                                                utenteMod.kcal = (utenteMod.kcal*1.5).toInt();
-                                                break;
-                                            }
-                                          }
-                                          utenteMod.carbo= ((utenteMod.kcal/100)*50)/4;
-                                          utenteMod.proteine= ((utenteMod.kcal/100)*20)/4;
-                                          utenteMod.grassi= ((utenteMod.kcal/100)*30)/8;
                                           updateUtente(utenteMod);
                                           const snackBar = SnackBar(                    //modifico utente
                                             content: Text('Utente Aggiornato'),
@@ -436,8 +394,8 @@ class ProfiloPageState extends State<ProfiloPage> {
                                         }
                                       }
                                     }
-                                  }
-                                }
+
+
 
                               },
                             ),
@@ -451,7 +409,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                     mainAxisAlignment: MainAxisAlignment.center,        //schermata caricamento mentre vengono prelevati i dati
                     children: const [
                       Icon(Icons.loop),
-                      Text('Caricamento'),
+                      Text('Loading'),
                     ],
                   ));
                 }
@@ -479,13 +437,7 @@ class ProfiloPageState extends State<ProfiloPage> {
       'cognome': utente.cognome,
       'stile': utente.stile,
       'sesso': utente.sesso,
-      'altezza': utente.altezza,
-      'peso': utente.peso,
       'eta': utente.eta,
-      'kcal': utente.kcal,
-      'carbo': utente.carbo,
-      'grassi': utente.grassi,
-      'proteine': utente.proteine,
     });
   }
 }

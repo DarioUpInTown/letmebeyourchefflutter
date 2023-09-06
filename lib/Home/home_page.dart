@@ -337,7 +337,7 @@ class HomePageState extends State<HomePage> {
                                           ],
                                         ),
                                       ),
-                                      Expanded(
+                                      /*Expanded(
                                         child:
                                         FutureBuilder<Utente?>(
                                             future: readUtente(),
@@ -531,7 +531,7 @@ class HomePageState extends State<HomePage> {
                                             }
                                         ),
 
-                                      ),
+                                      ),*/
                                     ],
                                   )
                                 ],

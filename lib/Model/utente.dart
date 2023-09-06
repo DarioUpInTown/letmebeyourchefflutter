@@ -4,13 +4,7 @@ class Utente{           //Model Utente
   String cognome;
   String stile;
   String sesso;
-  int altezza;
-  double peso;
   int eta;
-  int kcal;
-  double carbo;
-  double grassi;
-  double proteine;
 
 
   Utente({
@@ -19,13 +13,7 @@ class Utente{           //Model Utente
     required this.cognome,
     required this.stile,
     required this.sesso,
-    required this.altezza,
-    required this.peso,
     required this.eta,
-    required this.kcal,
-    required this.carbo,
-    required this.grassi,
-    required this.proteine,
   });
 
   Map<String, dynamic> toMap() {
@@ -35,13 +23,7 @@ class Utente{           //Model Utente
       'cognome': cognome,
       'stile': stile,
       'sesso': sesso,
-      'altezza': altezza,
-      'peso': peso,
       'eta': eta,
-      'kcal': kcal,
-      'carbo': carbo,
-      'grassi': grassi,
-      'proteine': proteine
     };
   }
 
@@ -51,12 +33,6 @@ class Utente{           //Model Utente
     cognome: json['cognome'] as String,
     stile: json['stile'] as String,
     sesso: json['sesso'] as String,
-    altezza: json['altezza'] as int,
-    peso: json['peso'] as double,
     eta: json['eta'] as int,
-    kcal: json['kcal'] as int,
-    carbo: json['carbo'] as double,
-    grassi: json['grassi'] as double,
-    proteine: json['proteine'] as double,
   );
 }

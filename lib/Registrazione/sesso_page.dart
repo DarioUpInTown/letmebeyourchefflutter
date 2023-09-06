@@ -1,4 +1,4 @@
-import 'package:LetMeBeYourChefFlutter/Registrazione/altezza_page.dart';
+import 'package:LetMeBeYourChefFlutter/Registrazione/eta_page.dart';
 import 'package:flutter/material.dart';
 
 import '../Model/utente.dart';
@@ -141,7 +141,7 @@ class SessoPageState extends State<SessoPage> {
                     }else{
                       widget.utente.sesso=genere;
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => AltezzaPage(utente: widget.utente,),));
+                        builder: (context) => EtaPage(utente: widget.utente,),));
                     }
                   },
                 ),

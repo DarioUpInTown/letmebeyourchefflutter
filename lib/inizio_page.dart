@@ -50,12 +50,12 @@ class InizioPageState extends State<InizioPage> {
                       const Image(image: AssetImage('assets/images/color_logo_no_background.png')),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        child: Text('La tua Applicazione per la', style: TextStyle(fontSize: 20,color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
+                        child: Text('Don\'t you know hat to cook today?', style: TextStyle(fontSize: 20,color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
 
                       ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                        child: Text('nutrizione e una vita più sana', style: TextStyle(fontSize: 20,color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
+                        child: Text('LetMeBeYourChef!', style: TextStyle(fontSize: 30,color: Colors.blue,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
                       ),
 
                       Padding(
@@ -75,7 +75,7 @@ class InizioPageState extends State<InizioPage> {
                               child: const Padding(
                                 padding: EdgeInsets.all(9.0),
                                 child: Text(
-                                  "INIZIA",
+                                  "SIGN UP",
                                   style: TextStyle(
                                     fontSize: 24,
                                   ),
@@ -105,7 +105,7 @@ class InizioPageState extends State<InizioPage> {
                               child: const Padding(
                                 padding: EdgeInsets.all(9.0),
                                 child: Text(
-                                  "ACCEDI",
+                                  "LOGIN",
                                   style: TextStyle(
                                     fontSize: 24,
                                   ),

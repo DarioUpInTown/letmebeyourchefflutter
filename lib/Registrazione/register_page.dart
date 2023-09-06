@@ -241,7 +241,7 @@ class RegisterPageState extends State<RegisterPage> {
                               password: passwordController.text,
                             );
                             widget.utente.email=emailController.text;
-                            if(widget.utente.sesso=='Uomo'){
+                            /*if(widget.utente.sesso=='Uomo'){
                               widget.utente.kcal = ((66.5 + (13.8*widget.utente.peso) + (5*widget.utente.altezza)) - (6.8*widget.utente.eta)).toInt();
                               switch(widget.utente.stile){
                                 case 'Sedentario':
@@ -276,7 +276,7 @@ class RegisterPageState extends State<RegisterPage> {
                             }
                             widget.utente.carbo= ((widget.utente.kcal/100)*50)/4;
                             widget.utente.proteine= ((widget.utente.kcal/100)*20)/4;
-                            widget.utente.grassi= ((widget.utente.kcal/100)*30)/8;
+                            widget.utente.grassi= ((widget.utente.kcal/100)*30)/8;*/
                             creaUtente(utente: widget.utente);
                             Navigator.pushNamedAndRemoveUntil(                              //loggo l'utente sulla home
                                 context, '/home', ModalRoute.withName('/home'));
