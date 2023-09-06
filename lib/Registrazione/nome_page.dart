@@ -95,16 +95,16 @@ class NomePageState extends State<NomePage> {
                   child: SizedBox(
                       width: 130,
                       height:130,
-                      child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
+                      child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
                 ),
               ),
               const Center(child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Conosciamoci meglio!',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+                child: Text('Let\'s start!',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
               )),
               const Center(child: Padding(
                 padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
-                child: Text('Inserisci i tuoi dati', style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+                child: Text('Insert your data', style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
               )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -112,14 +112,14 @@ class NomePageState extends State<NomePage> {
                   controller: nomeController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(35),
                     ),
-                    labelText: 'Nome',
+                    labelText: 'First name',
                   ),
                 ),
               ),
@@ -129,14 +129,14 @@ class NomePageState extends State<NomePage> {
                   controller:  cognomeController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
-                    labelText: 'Cognome',
+                    labelText: 'Last name',
                   ),
                 ),
               ),
@@ -156,7 +156,7 @@ class NomePageState extends State<NomePage> {
                       child: const Padding(
                         padding: EdgeInsets.all(9.0),
                         child: Text(
-                          "AVANTI",
+                          "NEXT",
                           style: TextStyle(
                             fontSize: 24,
                           ),
@@ -166,7 +166,7 @@ class NomePageState extends State<NomePage> {
                       onPressed:()   {
                         if(nomeController.text=="" || cognomeController.text==""){        //Validazione form
                           const snackBar = SnackBar(
-                            content: Text("Inserisci un nome e un cognome"),
+                            content: Text("Insert all data"),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }else{

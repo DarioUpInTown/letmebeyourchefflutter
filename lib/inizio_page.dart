@@ -47,16 +47,17 @@ class InizioPageState extends State<InizioPage> {
                     mainAxisAlignment: MainAxisAlignment.center ,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Image(image: AssetImage('assets/images/color_logo_no_background.png')),
+                      const Image(image: AssetImage('assets/images/logo_no_background.png')),
+                      const Image(image: AssetImage('assets/images/logo_scritta_pane.png')),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                        child: Text('Don\'t you know hat to cook today?', style: TextStyle(fontSize: 20,color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
+                        child: Text('Don\'t you know what to cook today?', style: TextStyle(fontSize: 20,color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
 
                       ),
-                      const Padding(
+                      /*const Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
                         child: Text('LetMeBeYourChef!', style: TextStyle(fontSize: 30,color: Colors.blue,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold)),
-                      ),
+                      ),*/
 
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),

@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const HomePage(title: 'Login Demo'),
       },
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       //home: const MyHomePage(title: 'LetMeBeYourChefFlutter'),
     );
