@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
 
   }
   Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
-    final docUtente = FirebaseFirestore.instance.collection('utenti').doc(email);
+    final docUtente = FirebaseFirestore.instance.collection('UtenteFL').doc(email);
     final snapshot= await docUtente.get();
     if(snapshot.exists){
       return Utente.fromMap(snapshot.data()!);

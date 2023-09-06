@@ -421,7 +421,7 @@ class ProfiloPageState extends State<ProfiloPage> {
     );
   }
    Future<Utente?> readUtente() async {                                       //leggo i dati dell'utente
-     final docUtente = FirebaseFirestore.instance.collection('utenti').doc(email);
+     final docUtente = FirebaseFirestore.instance.collection('UtenteFL').doc(email);
      final snapshot= await docUtente.get();
      if(snapshot.exists){
        return Utente.fromMap(snapshot.data()!);
@@ -429,7 +429,7 @@ class ProfiloPageState extends State<ProfiloPage> {
      return null;
   }                                                                     //modifico i dati dell'utente
   Future updateUtente(Utente utente) async {
-    final docUtente = FirebaseFirestore.instance.collection('utenti').doc(utente.email);
+    final docUtente = FirebaseFirestore.instance.collection('UtenteFL').doc(utente.email);
     docUtente.update({
       'nome': utente.nome,
       'cognome': utente.cognome,
