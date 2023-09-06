@@ -79,9 +79,9 @@ class StileDiVitaPageState extends State<StileDiVitaPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 25, 16, 0),
                 child: SizedBox(
-                    width: 130,
-                    height:130,
-                    child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
+                    width: 250,
+                    height:250,
+                    child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
               ),
             ),
             const Center(child: Padding(
@@ -154,13 +154,13 @@ class StileDiVitaPageState extends State<StileDiVitaPage> {
                           )
                       )
                   ),
-                  child: const Text("AVANTI", style: TextStyle(
+                  child: const Text("NEXT", style: TextStyle(
                     fontSize: 24,
                   ),),
                   onPressed: () {
                     if(checked!= true){               //Validazione form
                       const snackBar = SnackBar(
-                        content: Text("Seleziona un'opzione"),
+                        content: Text("Chose an option"),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }else{

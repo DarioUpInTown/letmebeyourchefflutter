@@ -79,19 +79,19 @@ class SessoPageState extends State<SessoPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 25, 16, 0),
                 child: SizedBox(
-                    width: 130,
-                    height:130,
-                    child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
+                    width: 250,
+                    height:250,
+                    child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
               ),
             ),
             const Center(child: Padding(
               padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-              child: Text('Uomo o Donna?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+              child: Text('Wich is your gender?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
             )),
             ListTile(
-              title: const Text('Uomo'),
+              title: const Text('Man'),
               leading: Radio(
-                value: 'Uomo',
+                value: 'Woman',
                 groupValue: genere,
                 onChanged: (value)  {
                   setState(()  {
@@ -102,9 +102,9 @@ class SessoPageState extends State<SessoPage> {
               ),
             ),
             ListTile(
-              title: const Text('Donna'),
+              title: const Text('Woman'),
               leading: Radio(
-                value: 'Donna',
+                value: 'Woman',
                 groupValue: genere,
                 onChanged: (value) {
                   setState(() {
@@ -129,13 +129,13 @@ class SessoPageState extends State<SessoPage> {
                           )
                       )
                   ),
-                  child: const Text("AVANTI",style: TextStyle(
+                  child: const Text("NEXT",style: TextStyle(
                     fontSize: 24,
                   ),),
                   onPressed: () {
                     if(checked!= true){                   //Validazione form
                       const snackBar = SnackBar(
-                        content: Text("Seleziona un'opzione"),
+                        content: Text("Select an option"),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }else{

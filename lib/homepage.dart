@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:LetMeBeYourChefFlutter/Home/profilo_page.dart';
+import 'package:LetMeBeYourChefFlutter/Model/utente.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'RecipeView.dart';
 import 'model.dart';
@@ -7,16 +11,24 @@ import 'search.dart';
 import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key, required this.title});
+  final String title;
   @override
+
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
 
+  late String data = '';
+  late String email='';
+
   bool isLoading = true;
   List<RecipeModel> recipeList = <RecipeModel>[];
   TextEditingController searchController = new TextEditingController();
   List reciptCatList = [{"imgUrl": "https://www.thesun.co.uk/wp-content/uploads/2020/08/NINTCHDBPICT000603046726.jpg?w=1280&quality=44", "heading": "Italian Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://www.lospicchiodaglio.it/img/news/sapete-cos-e-il-junk-food.jpg", "heading": "USA Food"},{"imgUrl": "https://cdn.tasteatlas.com//images/toplistarticles/8cc45833c34a4bc99d85375ecfde18f6.jpg?mw=1300", "heading": "Oriental Food"}];
+
+
   getRecipes(String query) async {
     String url =
         "https://api.edamam.com/search?q=$query&app_id=d6514d39&app_key=40431e11d35ff909597ab69b1b0e04f9";
@@ -42,13 +54,56 @@ class _HomeState extends State<Home> {
   }
   @override
   void initState() {
-    // TODO: implement initState
+
+
+    if (FirebaseAuth.instance.currentUser != null) {
+      for (final providerProfile in FirebaseAuth.instance.currentUser!.providerData) {
+        email = providerProfile.email!;               //prendo email utente
+      }
+    }
+    var now=DateTime.now();
+    data= '${now.day}-${now.month}-${now.year}';
     super.initState();
-    getRecipes("Ladoo");
+    getRecipes("pizza");
+
   }
+  Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
+    final docUtente = FirebaseFirestore.instance.collection('utenti').doc(email);
+    final snapshot= await docUtente.get();
+    if(snapshot.exists){
+      return Utente.fromMap(snapshot.data()!);
+    }
+    return null;
+  }
+  late Utente? utente= null;
+  late int kcal=0;
+  late double fat=0;
+  late double carboidrati=0;
+  late double pro=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.logout_outlined),
+          onPressed: () async {
+            Navigator.pushNamedAndRemoveUntil(                //effettuo il logout e torno a InizioPage
+                context, '/', ModalRoute.withName('/'));
+            await FirebaseAuth.instance.signOut();
+          },
+        ),
+        title: const Text("Welcome to LetMeBeYourChef!", style: TextStyle(fontSize: 18),),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.portrait),
+            onPressed: () async {                                             //vado verso pagina utente
+              await Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ProfiloPage())).then((value) => setState(() {readUtente();}));
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Container(

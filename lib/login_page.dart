@@ -41,10 +41,10 @@ class LoginPageState extends State<LoginPage> {
 
               children: [
                 const SizedBox(
-                    width: 130,
-                    height:130,
-                    child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
-                const Image(image: AssetImage('assets/images/title_black.png')),
+                    width: 250,
+                    height:250,
+                    child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
+                const Image(image: AssetImage('assets/images/logo_scritta_pane.png')),
                 const Padding(
                   padding: EdgeInsets.all(18.0),
                   child: Center(child: Text('Login', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 31),)),
@@ -54,8 +54,8 @@ class LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: MultiValidator([                                 //Validazione email automatica
-                      RequiredValidator(errorText: "* Richiesto"),
-                      EmailValidator(errorText: "Inserisci un indirizzo email valido"),
+                      RequiredValidator(errorText: "* Required"),
+                      EmailValidator(errorText: "Insert a valid e-mail"),
                     ]),
                     controller: emailController,
                     decoration: InputDecoration(
@@ -85,8 +85,8 @@ class LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: MultiValidator([                           //Validazione password automatica
-                      RequiredValidator(errorText: "* Richiesto"),
-                      MinLengthValidator(6,errorText: "La Password deve essere di 6 o più caratteri"),
+                      RequiredValidator(errorText: "* Required"),
+                      MinLengthValidator(6,errorText: "The password must be 6 or more carachters"),
                     ]),
                     obscureText: true,
                     controller: passwordController,
@@ -128,7 +128,7 @@ class LoginPageState extends State<LoginPage> {
                         child: const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Text(
-                            "ACCEDI",
+                            "LOGIN",
                             style: TextStyle(
                               fontSize: 22,
                             ),
@@ -143,13 +143,13 @@ class LoginPageState extends State<LoginPage> {
                                 password: passwordController.text,
                               );                                              //Se la form è valida loggo l'utente e vado sulla home
                               Navigator.pushNamedAndRemoveUntil(
-                                  context, '/home', ModalRoute.withName('/home'));
+                                  context, '/homepage', ModalRoute.withName('/homepage'));
                             } on FirebaseAuthException catch (e) {                  //Altrimenti mostro una snackbar
                               if (e.code == 'user-not-found') {
-                                const snackBar = SnackBar(content: Text('Utente non registrato'));
+                                const snackBar = SnackBar(content: Text('User not registred'));
                                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               } else if (e.code == 'wrong-password') {
-                                const snackBar = SnackBar(content: Text('Password errata'));
+                                const snackBar = SnackBar(content: Text('Wrong password'));
                                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
                             }

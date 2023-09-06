@@ -101,22 +101,22 @@ class RegisterPageState extends State<RegisterPage> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16, 25, 16, 0),
                   child: SizedBox(
-                      width: 130,
-                      height:130,
-                      child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
+                      width: 250,
+                      height:250,
+                      child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
                 ),
               ),
               const Center(child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                child: Text('Un ultimo passo!',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+                child: Text('Last step!',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
               )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: MultiValidator([                                 //autovalidazione email
-                    RequiredValidator(errorText: "* Richiesto"),
-                    EmailValidator(errorText: "Inserisci un indirizzo email valido"),
+                    RequiredValidator(errorText: "* Required!"),
+                    EmailValidator(errorText: "Insert a valid e-mail"),
                   ]),
                   controller: emailController,
                   decoration: InputDecoration(
@@ -146,8 +146,8 @@ class RegisterPageState extends State<RegisterPage> {
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: MultiValidator([
-                    RequiredValidator(errorText: "* Richiesto"),            //autovalidazione password
-                    MinLengthValidator(6,errorText: "La Password deve essere di 6 o più caratteri"),
+                    RequiredValidator(errorText: "* Required"),            //autovalidazione password
+                    MinLengthValidator(6,errorText: "Password must be 6 or more characters"),
                   ]),
                   obscureText: true,
                   controller: passwordController,
@@ -179,10 +179,10 @@ class RegisterPageState extends State<RegisterPage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (val){                                           //autovalidazione conferma password
                     if(confermaPasswordController.text.isEmpty) {
-                      return "* Richiesto";
+                      return "* Required";
                     }
                     if(val != passwordController.text) {
-                      return "Le Password non corrispondo";
+                      return "Passwords don't match!";
                     }
                     return null;
                   },
@@ -206,7 +206,7 @@ class RegisterPageState extends State<RegisterPage> {
                       borderSide: const BorderSide(width: 2, color: Colors.red),
                       borderRadius: BorderRadius.circular(35),
                     ),
-                    labelText: 'Conferma Password',
+                    labelText: 'Confirm Password',
                   ),
                 ),
               ),
@@ -226,7 +226,7 @@ class RegisterPageState extends State<RegisterPage> {
                       child: const Padding(
                         padding: EdgeInsets.all(9.0),
                         child: Text(
-                          "REGISTRATI",
+                          "REGISTER NOW!",
                           style: TextStyle(
                             fontSize: 24,
                           ),
@@ -279,12 +279,12 @@ class RegisterPageState extends State<RegisterPage> {
                             widget.utente.grassi= ((widget.utente.kcal/100)*30)/8;*/
                             creaUtente(utente: widget.utente);
                             Navigator.pushNamedAndRemoveUntil(                              //loggo l'utente sulla home
-                                context, '/home', ModalRoute.withName('/home'));
+                                context, '/homepage', ModalRoute.withName('/homepage'));
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                             } else if (e.code == 'email-already-in-use') {
                               const snackBar = SnackBar(                        //se email già in uso snackbar
-                                content: Text("Email già in uso!"),
+                                content: Text("That's e-mail is already used!"),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             }

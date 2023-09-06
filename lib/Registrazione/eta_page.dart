@@ -80,14 +80,14 @@ class EtaPageState extends State<EtaPage> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(16, 25, 16, 0),
                 child: SizedBox(
-                    width: 130,
-                    height:130,
-                    child: Image(image: AssetImage('assets/images/apple_nobg.png'))),
+                    width: 250,
+                    height:250,
+                    child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
               ),
             ),
             const Center(child: Padding(
               padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-              child: Text('Quanti anni hai?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+              child: Text('How old are you?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
             )),
             Form(
               key: formKey,
@@ -111,7 +111,7 @@ class EtaPageState extends State<EtaPage> {
                               borderSide: const BorderSide(width: 2, color: Colors.green),
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            labelText: 'Età: 16-90 Anni',
+                            labelText: 'Age: 16-90 years old',
                           ),
                         ),
                       ),
@@ -129,7 +129,7 @@ class EtaPageState extends State<EtaPage> {
                                     )
                                 )
                             ),
-                            child: const Text("AVANTI",style: TextStyle(
+                            child: const Text("NEXT",style: TextStyle(
                               fontSize: 24,
                             ),),
                             onPressed: () {
@@ -147,7 +147,7 @@ class EtaPageState extends State<EtaPage> {
 
                                 }else{
                                   const snackBar = SnackBar(
-                                    content: Text("Inserisci un eta tra 16 e 90 anni"),
+                                    content: Text("Insert an age beetween 16 and 60"),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }

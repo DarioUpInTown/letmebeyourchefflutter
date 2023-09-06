@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:LetMeBeYourChefFlutter/homepage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,12 +55,12 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(                       //Costruzione app
       title: 'LetMeBeYourChef!',
       initialRoute:
-      FirebaseAuth.instance.currentUser == null ? '/' : '/home',      //Se utente loggato vado sulla home altrimenti all'inizio
+      FirebaseAuth.instance.currentUser == null ? '/' : '/homepage',      //Se utente loggato vado sulla home altrimenti all'inizio
       routes: {                                 //Rotte principali
         '/': (context) => const InizioPage(),
         '/login': (context) => const LoginPage(),
         '/registrazione': (context) => const NomePage(),
-        '/home': (context) => const HomePage(title: 'Login Demo'),
+        '/homepage': (context) => const Home(title : "Login Demo"),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
