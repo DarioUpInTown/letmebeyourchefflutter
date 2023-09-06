@@ -27,8 +27,8 @@ class ProfiloPageState extends State<ProfiloPage> {
   late Utente? utente=null;
   Utente utenteMod= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', eta: 0);
   final List<String> genderItems = [
-    'Uomo',               //lista dropdown button sesso
-    'Donna',
+    'Man',               //lista dropdown button sesso
+    'Woman',
   ];
   final List<String> stileItems = [
     'Sedentario',
@@ -36,8 +36,6 @@ class ProfiloPageState extends State<ProfiloPage> {
     'Attivo',             //lista dropdown button stile di vita
     'Molto Attivo',
   ];
-
-
 
 
   @override
@@ -65,7 +63,7 @@ class ProfiloPageState extends State<ProfiloPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  const Text('Profilo'),
+        title:  const Text('Profile'),
       ),
       body: Column(
         children: [
@@ -102,7 +100,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                     width: 2, color: Colors.green),
                                 borderRadius: BorderRadius.circular(35),
                               ),
-                              labelText: 'Nome',
+                              labelText: 'First name',
                                 labelStyle: (const TextStyle(
                                   color: Colors.green,))
                             ),
@@ -124,7 +122,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                     width: 2, color: Colors.green),
                                 borderRadius: BorderRadius.circular(35),
                               ),
-                              labelText: 'Cognome',
+                              labelText: 'Last name',
                                 labelStyle: (const TextStyle(
                                   color: Colors.green,))
                             ),
@@ -177,14 +175,14 @@ class ProfiloPageState extends State<ProfiloPage> {
                                         width: 2, color: Colors.green),
                                     borderRadius: BorderRadius.circular(35),
                                   ),
-                                  labelText: 'Genere',
+                                  labelText: 'Gender',
                                   labelStyle: (const TextStyle(
                                     color: Colors.green,))
                                 //Add more decoration as you want here
                                 //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                               ),
                               hint: const Text(
-                                'Genere',
+                                'Gender',
                               ),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
@@ -344,19 +342,19 @@ class ProfiloPageState extends State<ProfiloPage> {
                                       )
                                   )
                               ),
-                              child: const Text("AGGIORNA",style: TextStyle(
+                              child: const Text("SAVE ALL",style: TextStyle(
                                 fontSize: 24,
                               ),),
                               onPressed: () {
                                 if(nomeController.text==''){
                                   const snackBar = SnackBar(
-                                    content: Text("Inserisci un nome"),
+                                    content: Text("Insert a first name"),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }else{
                                   if(cognomeController.text==''){
                                     const snackBar = SnackBar(            //Validazione form
-                                      content: Text("Inserisci un cognome"),
+                                      content: Text("Insert a last name"),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   }else/*{
@@ -374,7 +372,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                       }else*/{
                                         if(etaController.text=="" || (int.parse(etaController.text)>90 || int.parse(etaController.text)<16)){
                                           const snackBar = SnackBar(
-                                            content: Text("Inserisci un eta tra 16 e 90 anni"),
+                                            content: Text("Insert an age between 16 and 90 years"),
                                           );
                                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                         }else{
@@ -387,7 +385,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           utenteMod.stile=stile;
                                           updateUtente(utenteMod);
                                           const snackBar = SnackBar(                    //modifico utente
-                                            content: Text('Utente Aggiornato'),
+                                            content: Text('User data updated'),
                                           );
                                           ScaffoldMessenger.of(context).showSnackBar(
                                               snackBar);
