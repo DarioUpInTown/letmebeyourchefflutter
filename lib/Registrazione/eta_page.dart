@@ -104,11 +104,11 @@ class EtaPageState extends State<EtaPage> {
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(width: 2, color: Colors.green),
+                              borderSide: const BorderSide(width: 2, color: Colors.orange),
                               borderRadius: BorderRadius.circular(35),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(width: 2, color: Colors.green),
+                              borderSide: const BorderSide(width: 2, color: Colors.orange),
                               borderRadius: BorderRadius.circular(35),
                             ),
                             labelText: 'Age: 16-90 years old',

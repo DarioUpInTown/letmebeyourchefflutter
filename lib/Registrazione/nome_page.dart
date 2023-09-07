@@ -112,11 +112,11 @@ class NomePageState extends State<NomePage> {
                   controller: nomeController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.blue),
+                      borderSide: const BorderSide(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.orange),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     labelText: 'First name',

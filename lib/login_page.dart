@@ -61,19 +61,19 @@ class LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.email,),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.green),
+                        borderSide: const BorderSide(width: 2, color: Colors.orange),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.green),
+                        borderSide: const BorderSide(width: 2, color: Colors.orange),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.red),
+                        borderSide: const BorderSide(width: 2, color: Colors.blue),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.red),
+                        borderSide: const BorderSide(width: 2, color: Colors.blue),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       labelText: 'Email',
@@ -93,19 +93,19 @@ class LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.password,),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.green),
+                        borderSide: const BorderSide(width: 2, color: Colors.orange),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.green),
+                        borderSide: const BorderSide(width: 2, color: Colors.orange),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       errorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.red),
+                        borderSide: const BorderSide(width: 2, color: Colors.blue),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 2, color: Colors.red),
+                        borderSide: const BorderSide(width: 2, color: Colors.blue),
                         borderRadius: BorderRadius.circular(35),
                       ),
                       labelText: 'Password',
