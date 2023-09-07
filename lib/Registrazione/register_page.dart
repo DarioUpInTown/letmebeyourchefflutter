@@ -227,42 +227,6 @@ class RegisterPageState extends State<RegisterPage> {
                               password: passwordController.text,
                             );
                             widget.utente.email=emailController.text;
-                            /*if(widget.utente.sesso=='Uomo'){
-                              widget.utente.kcal = ((66.5 + (13.8*widget.utente.peso) + (5*widget.utente.altezza)) - (6.8*widget.utente.eta)).toInt();
-                              switch(widget.utente.stile){
-                                case 'Sedentario':
-                                  widget.utente.kcal = (widget.utente.kcal*1.2).toInt();
-                                  break;                                                      //Calcolo kcal e nutrienti in base ai dati forniti
-                                case 'Poco Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.3).toInt();
-                                  break;
-                                case 'Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.4).toInt();
-                                  break;
-                                case 'Molto Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.5).toInt();
-                                  break;
-                              }
-                            }else{
-                              widget.utente.kcal =  (65.1 + (9.6*widget.utente.peso) + (1.9*widget.utente.altezza) - (4.7*widget.utente.eta)).toInt();
-                              switch(widget.utente.stile){
-                                case 'Sedentario':
-                                  widget.utente.kcal = (widget.utente.kcal*1.2).toInt();
-                                  break;
-                                case 'Poco Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.3).toInt();
-                                  break;
-                                case 'Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.4).toInt();
-                                  break;
-                                case 'Molto Attivo':
-                                  widget.utente.kcal = (widget.utente.kcal*1.5).toInt();
-                                  break;
-                              }
-                            }
-                            widget.utente.carbo= ((widget.utente.kcal/100)*50)/4;
-                            widget.utente.proteine= ((widget.utente.kcal/100)*20)/4;
-                            widget.utente.grassi= ((widget.utente.kcal/100)*30)/8;*/
                             creaUtente(utente: widget.utente);
                             Navigator.pushNamedAndRemoveUntil(                              //loggo l'utente sulla home
                                 context, '/homepage', ModalRoute.withName('/homepage'));

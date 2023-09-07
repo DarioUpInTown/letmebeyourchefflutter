@@ -31,7 +31,7 @@ class Utente{           //Model Utente
     email: json['email'] as String,
     nome: json['nome'] as String,
     cognome: json['cognome'] as String,
-    intolleranze: json['intolleranze'] as String,
+    intolleranze: json['intolleranze'].toString() as String,
     sesso: json['sesso'] as String,
     eta: json['eta'] as int,
   );

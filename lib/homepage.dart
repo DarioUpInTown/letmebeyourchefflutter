@@ -3,13 +3,18 @@ import 'dart:developer';
 import 'package:LetMeBeYourChefFlutter/Home/profilo_page.dart';
 import 'package:LetMeBeYourChefFlutter/Model/utente.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'FavouriteRecipesScreen.dart';
 import 'RecipeView.dart';
 import 'model.dart';
 import 'search.dart';
 import 'package:http/http.dart';
+
+enum Page { Home, Preferite }
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
@@ -21,6 +26,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  Page _currentPage = Page.Home; // Inizialmente impostato su "Home"
   late String data = '';
   late String email='';
 
@@ -28,6 +34,12 @@ class _HomeState extends State<Home> {
   List<RecipeModel> recipeList = <RecipeModel>[];
   TextEditingController searchController = new TextEditingController();
   List reciptCatList = [{"imgUrl": "https://www.thesun.co.uk/wp-content/uploads/2020/08/NINTCHDBPICT000603046726.jpg?w=1280&quality=44", "heading": "Italian Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://www.lospicchiodaglio.it/img/news/sapete-cos-e-il-junk-food.jpg", "heading": "USA Food"},{"imgUrl": "https://cdn.tasteatlas.com//images/toplistarticles/8cc45833c34a4bc99d85375ecfde18f6.jpg?mw=1300", "heading": "Oriental Food"}];
+
+  void _changePage(Page page) {
+    setState(() {
+      _currentPage = page;
+    });
+  }
 
   getRecipes(String query) async {
     String url =
@@ -100,6 +112,19 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Naviga alla schermata delle ricette preferite
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => FavoriteRecipesScreen(),
+            ),
+          );
+        },
+        child: Icon(Icons.favorite, color: Colors.red,),
+      ),
+
       body: Stack(
         children: [
           Container(
@@ -163,7 +188,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Text(
                         "WHAT DO YOU WANT TO COOK TODAY?",
-                        style: TextStyle(fontSize: 33, color: Colors.white),
+                        style: TextStyle(fontSize: 30, color: Colors.cyan),
                       ),
                       SizedBox(
                         height: 10,
@@ -255,29 +280,43 @@ class _HomeState extends State<Home> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               IconButton(
-                                                icon: Icon(
-                                                    Icons.favorite_border
-                                                ), onPressed: () async {
-                                                // Ottiene l'ID dell'utente autenticato
-                                                String? userId = FirebaseAuth
-                                                    .instance.currentUser
-                                                    ?.email;
+                                                icon: FutureBuilder<bool>(
+                                                  future: isRecipeInFirestore(recipeUri: recipeList[index].appuri), // Supponi di avere l'ID della ricetta
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot.connectionState == ConnectionState.waiting) {
+                                                      // In attesa del risultato
+                                                      return CircularProgressIndicator(); // o un'icona di caricamento
+                                                    } else if (snapshot.hasError) {
+                                                      // Errore nella query
+                                                      return Icon(Icons.error); // o un'icona di errore
+                                                    } else {
+                                                      // Verifica se la ricetta è presente in Firestore
+                                                      final bool isRecipePresent = snapshot.data ?? false;
+
+                                                      // Restituisci l'icona corrispondente
+                                                      return Icon(
+                                                        isRecipePresent ? Icons.favorite : Icons.favorite_border,
+                                                        color: isRecipePresent ? Colors.red : Colors.blue, // Opzionale: cambia il colore
+                                                      );
+                                                    }
+                                                  },
+                                                ), onPressed: ()  async {
 
                                                 // ID della ricetta da rimuovere
-                                                String recipeId = RecipeModel.appuri;
+                                                String recipeUri = recipeList[index].appuri;
 
                                                 // Riferimento al documento dell'utente nella collezione
                                                 DocumentReference userDocRef = FirebaseFirestore.instance
                                                     .collection('Utente')
-                                                    .doc(userId);
+                                                    .doc(email);
 
-                                                // Riferimento alla collezione delle ricette preferite dell'utente
-                                                CollectionReference favoriteRecipesCollectionRef = userDocRef.collection('Favourite recipes FL');
+                                                // Riferimento alla specifica ricetta della collezione delle ricette preferite dell'utente
+                                                CollectionReference favoriteRecipesCollectionRef = userDocRef.collection('Ricette preferite FL');
 
                                                 // Esegui una query per cercare la ricetta specifica tra i preferiti dell'utente
-                                                QuerySnapshot querySnapshot = await favoriteRecipesCollectionRef
-                                                    .where('recipeId', isEqualTo: recipeId)
-                                                    .get();
+                                                QuerySnapshot querySnapshot =  await favoriteRecipesCollectionRef
+                                                    .where('recipeUri', isEqualTo: recipeUri)
+                                                    .get() as QuerySnapshot<Object?>;
 
                                                 if (querySnapshot.docs.isNotEmpty) {
                                                   // La ricetta è presente tra i preferiti dell'utente
@@ -286,26 +325,62 @@ class _HomeState extends State<Home> {
                                                   DocumentReference recipeToRemoveRef = querySnapshot.docs[0].reference;
 
                                                   // Esegui la rimozione della ricetta dalla collezione dei preferiti
-                                                  await recipeToRemoveRef.delete();
+                                                   recipeToRemoveRef.delete().then((value) {
 
                                                   setState(() {
-                                                    icon: Icons.favorite_border; // Cambia l'icona a "non preferito"
+                                                    recipeList[index].favoriteIcon = Icons.favorite_border;
+                                                    recipeList[index].isFavourite = !recipeList[index].isFavourite; // Cambia l'icona a "non preferito"
                                                   });
+                                                  Fluttertoast.showToast(
+                                                  msg: 'Recipe deleted from favourites!',
+                                                  toastLength: Toast
+                                                      .LENGTH_SHORT,
+                                                  // Puoi cambiare la durata del toast
+                                                  gravity: ToastGravity
+                                                      .BOTTOM,
+                                                  // Posizione del toast
+                                                  timeInSecForIosWeb: 1,
+                                                  // Durata del toast per iOS/Web
+                                                  backgroundColor: Colors
+                                                      .blue,
+                                                  // Colore di sfondo del toast
+                                                  textColor: Colors
+                                                      .white, // Colore del testo del toast
+                                                  );
+                                                  }).catchError((error) {
+                                                     // Gestisci eventuali errori durante l'aggiunta
+                                                     Fluttertoast.showToast(
+                                                       msg: 'Error during the deletion: $error',
+                                                       toastLength: Toast
+                                                           .LENGTH_SHORT,
+                                                       // Puoi cambiare la durata del toast
+                                                       gravity: ToastGravity
+                                                           .BOTTOM,
+                                                       // Posizione del toast
+                                                       timeInSecForIosWeb: 1,
+                                                       // Durata del toast per iOS/Web
+                                                       backgroundColor: Colors
+                                                           .black,
+                                                       // Colore di sfondo del toast
+                                                       textColor: Colors
+                                                           .white, // Colore del testo del toast
+                                                     );
+                                                   });
                                                 }else {
                                                   // Aggiunge la ricetta preferita alla collezione "favoriteRecipes" di Firestore
                                                   FirebaseFirestore.instance
-                                                      .collection(
-                                                      'Utente')
-                                                      .doc(userId) // Usa l'ID dell'utente come ID del documento
-                                                      .collection('Favourite recipes FL')
-                                                      .add({'recipeName': RecipeModel.appuri,
-                                                    // Sostituisci con il nome della tua ricetta
+                                                      .collection('Utente')
+                                                      .doc(email) // Usa l'ID dell'utente come ID del documento
+                                                      .collection('Ricette preferite FL')
+                                                      .doc(recipeList[index].applabel)
+                                                      .set({'recipeUri': recipeList[index].appuri, 'isFavourite': true,
                                                   }).then((value) {
                                                     setState(() {
-                                                     icon : Icons.favorite; // Cambia l'icona a "non preferito"
+                                                      recipeList[index].favoriteIcon = Icons.favorite;
+                                                      recipeList[index].isFavourite = !recipeList[index].isFavourite; // Cambia l'icona a "non preferito"
                                                     });
                                                     Fluttertoast.showToast(
-                                                      msg: 'La ricetta è stata aggiunta ai preferiti!',
+                                                      msg: 'Recipe added to favourites!',
                                                       toastLength: Toast
                                                           .LENGTH_SHORT,
                                                       // Puoi cambiare la durata del toast
@@ -315,7 +390,7 @@ class _HomeState extends State<Home> {
                                                       timeInSecForIosWeb: 1,
                                                       // Durata del toast per iOS/Web
                                                       backgroundColor: Colors
-                                                          .green,
+                                                          .red,
                                                       // Colore di sfondo del toast
                                                       textColor: Colors
                                                           .white, // Colore del testo del toast
@@ -323,7 +398,7 @@ class _HomeState extends State<Home> {
                                                   }).catchError((error) {
                                                     // Gestisci eventuali errori durante l'aggiunta
                                                     Fluttertoast.showToast(
-                                                      msg: 'Errore durante l\'aggiunta della ricetta preferita: $error',
+                                                      msg: 'Error during the adding: $error',
                                                       toastLength: Toast
                                                           .LENGTH_SHORT,
                                                       // Puoi cambiare la durata del toast
@@ -333,7 +408,7 @@ class _HomeState extends State<Home> {
                                                       timeInSecForIosWeb: 1,
                                                       // Durata del toast per iOS/Web
                                                       backgroundColor: Colors
-                                                          .green,
+                                                          .black,
                                                       // Colore di sfondo del toast
                                                       textColor: Colors
                                                           .white, // Colore del testo del toast
@@ -375,7 +450,7 @@ class _HomeState extends State<Home> {
                                       ClipRRect(
                                           borderRadius: BorderRadius.circular(18.0),
                                           child: Image.network(reciptCatList[index]["imgUrl"], fit: BoxFit.cover,
-                                            width: 200,
+                                            width: 300,
                                             height: 250,)
                                       ),
                                       Positioned(
@@ -416,4 +491,47 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+  Future creaUtente({required Utente utente}) async{                                        //Funzione crea utente
+    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(utente.email);
+    await docUtente.set(utente.toMap());
+
+  }
+
+  QuerySnapshot checkRecipeFav({required String recipeUri})  {
+
+    // Riferimento al documento dell'utente nella collezione
+    DocumentReference userDocRef = FirebaseFirestore.instance
+        .collection('Utente')
+        .doc(email);
+
+    // Riferimento alla specifica ricetta della collezione delle ricette preferite dell'utente
+    CollectionReference favoriteRecipesCollectionRef = userDocRef.collection('Ricette preferite FL');
+
+    // Esegui una query per cercare la ricetta specifica tra i preferiti dell'utente
+    QuerySnapshot querySnapshot =  favoriteRecipesCollectionRef
+        .where('recipeUri', isEqualTo: recipeUri)
+        .get() as QuerySnapshot<Object?> ;
+
+    return querySnapshot;
+
+    /*if (querySnapshot.docs.isNotEmpty) return true;
+        else return false;*/
+
+  }
+
+  Future<bool> isRecipeInFirestore({required String recipeUri}) async {
+    // Esegui una query sulla collezione delle ricette con il campo ID della ricetta
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+        .collection('Utente')
+        .doc(email)
+        .collection('Ricette preferite FL')
+        .where('recipeUri', isEqualTo: recipeUri)
+        .get();
+
+    // Verifica se ci sono documenti corrispondenti alla query
+    return querySnapshot.docs.isNotEmpty;
+  }
+
 }
+
+
