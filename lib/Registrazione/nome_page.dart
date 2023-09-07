@@ -1,8 +1,7 @@
-import 'package:LetMeBeYourChefFlutter/Registrazione/stile_di_vita_page.dart';
+import 'package:LetMeBeYourChefFlutter/Registrazione/intolleranze_page.dart';
 import 'package:flutter/material.dart';
 
 import '../Model/utente.dart';
-
 
 class NomePage extends StatefulWidget {
   const NomePage({super.key});
@@ -14,7 +13,7 @@ class NomePage extends StatefulWidget {
 class NomePageState extends State<NomePage> {
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
-  Utente utente= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', eta: 0);
+  Utente utente= Utente(email: '', nome: '', cognome: '', intolleranze: '', sesso: '', eta: 0);
   final nomeController = TextEditingController();
   final cognomeController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -73,28 +72,14 @@ class NomePageState extends State<NomePage> {
                         width:35,
                         child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: SizedBox(
-                        height: 15,
-                        width:35,
-                        child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: SizedBox(
-                        height: 15,
-                        width:35,
-                        child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
-                  ),
                 ],
               ),
               const Center(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16, 25, 16, 0),
                   child: SizedBox(
-                      width: 130,
-                      height:130,
+                      width: 250,
+                      height:250,
                       child: Image(image: AssetImage('assets/images/logo_no_background.png'))),
                 ),
               ),
@@ -112,11 +97,11 @@ class NomePageState extends State<NomePage> {
                   controller: nomeController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.orange),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.blue),
+                      borderSide: const BorderSide(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     labelText: 'First name',
@@ -129,11 +114,11 @@ class NomePageState extends State<NomePage> {
                   controller:  cognomeController,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.orange),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.blue),
+                      borderSide: const BorderSide(width: 2, color: Colors.orange),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     labelText: 'Last name',
@@ -173,7 +158,7 @@ class NomePageState extends State<NomePage> {
                           utente.nome=nomeController.text;
                           utente.cognome=cognomeController.text;
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => StileDiVitaPage(utente: utente,),));
+                            builder: (context) => IntolleranzePage(utente: utente,),));
                         }
                       }
                   ),

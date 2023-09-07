@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const InizioPage(),
         '/login': (context) => const LoginPage(),
         '/registrazione': (context) => const NomePage(),
-        '/homepage': (context) => const Home(title : "Login Demo"),
+        '/homepage': (context) => const Home(title: "Login Demo"),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

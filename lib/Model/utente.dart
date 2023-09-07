@@ -2,7 +2,7 @@ class Utente{           //Model Utente
   String email;
   String nome;
   String cognome;
-  String stile;
+  String intolleranze;
   String sesso;
   int eta;
 
@@ -11,7 +11,7 @@ class Utente{           //Model Utente
     required this.email,
     required this.nome,
     required this.cognome,
-    required this.stile,
+    required this.intolleranze,
     required this.sesso,
     required this.eta,
   });
@@ -21,7 +21,7 @@ class Utente{           //Model Utente
       'email': email,
       'nome': nome,
       'cognome': cognome,
-      'stile': stile,
+      'intolleranze': intolleranze,
       'sesso': sesso,
       'eta': eta,
     };
@@ -31,7 +31,7 @@ class Utente{           //Model Utente
     email: json['email'] as String,
     nome: json['nome'] as String,
     cognome: json['cognome'] as String,
-    stile: json['stile'] as String,
+    intolleranze: json['intolleranze'] as String,
     sesso: json['sesso'] as String,
     eta: json['eta'] as int,
   );

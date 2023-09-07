@@ -59,20 +59,6 @@ class SessoPageState extends State<SessoPage> {
                       width:35,
                       child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: SizedBox(
-                      height: 15,
-                      width:35,
-                      child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: SizedBox(
-                      height: 15,
-                      width:35,
-                      child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
-                ),
               ],
             ),
             const Center(
@@ -86,12 +72,12 @@ class SessoPageState extends State<SessoPage> {
             ),
             const Center(child: Padding(
               padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-              child: Text('Wich is your gender?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+              child: Text('Man or woman?',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
             )),
             ListTile(
               title: const Text('Man'),
               leading: Radio(
-                value: 'Woman',
+                value: 'Man',
                 groupValue: genere,
                 onChanged: (value)  {
                   setState(()  {

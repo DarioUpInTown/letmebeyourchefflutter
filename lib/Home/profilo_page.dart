@@ -21,22 +21,31 @@ class ProfiloPageState extends State<ProfiloPage> {
   late String nome='';
   late String cognome='';
   late String data='';
-  late String stile='';
+  late String intolleranze='';
   late String genere='';
   late int eta=0;
   late Utente? utente=null;
-  Utente utenteMod= Utente(email: '', nome: '', cognome: '', stile: '', sesso: '', eta: 0);
+  Utente utenteMod= Utente(email: '', nome: '', cognome: '', intolleranze: '', sesso: '', eta: 0);
   final List<String> genderItems = [
     'Man',               //lista dropdown button sesso
     'Woman',
   ];
-  final List<String> stileItems = [
-    'Sedentario',
-    'Poco Attivo',
-    'Attivo',             //lista dropdown button stile di vita
-    'Molto Attivo',
+  final List<String> intolleranzeItems = [
+    'None',
+    'Dairy',
+    'Gluten',             //lista dropdown button intolleranze
+    'Peanut',
+    'Grain',
+    'Seafood',
+    'Egg',
+    'Sesame',
+    'Shellfish',
+    'Soy',
+    'Sulfite',
+    'Tree nut',
+    'Wheat',
+    'Other',
   ];
-
 
   @override
   void initState() {
@@ -50,7 +59,6 @@ class ProfiloPageState extends State<ProfiloPage> {
 
     return super.initState();
   }
-
 
   @override
   void dispose() {
@@ -78,7 +86,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                 nomeController.text = utente!.nome;
                 cognomeController.text = utente!.cognome;
                 etaController.text = utente!.eta.toString();          //inizializzo le form con i dati dell'utente
-                stile = utente!.stile;
+                intolleranze = utente!.intolleranze;
                 genere = utente!.sesso;
                   return Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -213,11 +221,10 @@ class ProfiloPageState extends State<ProfiloPage> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
                             child: DropdownButtonFormField(
-                              value: stile,
+                              value: intolleranze,
                               decoration: InputDecoration(
                                 //Add isDense true and zero Padding.
                                 //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
-
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         width: 2, color: Colors.green),
@@ -228,14 +235,14 @@ class ProfiloPageState extends State<ProfiloPage> {
                                         width: 2, color: Colors.green),
                                     borderRadius: BorderRadius.circular(35),
                                   ),
-                                  labelText: 'Stile di Vita',
+                                  labelText: 'Intolerances',
                                   labelStyle: (const TextStyle(
                                     color: Colors.green,))
                                 //Add more decoration as you want here
                                 //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
                               ),
                               hint: const Text(
-                                'Stile di Vita',
+                                'Intolerances',
                               ),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
@@ -243,7 +250,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                               ),
                               iconSize: 24,
 
-                              items: stileItems
+                              items: intolleranzeItems
                                   .map((item) =>
                                   DropdownMenuItem<String>(
                                     value: item,
@@ -253,7 +260,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                   ))
                                   .toList(),
                               onChanged: (value) {
-                                stile = value!;
+                                intolleranze = value!;
                               },
                             ),
                           ),
@@ -277,7 +284,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           width: 2, color: Colors.green),
                                       borderRadius: BorderRadius.circular(35),
                                     ),
-                                    labelText: 'Età',
+                                    labelText: 'Age',
                                   ),
                                 ),
                               ),
@@ -370,9 +377,9 @@ class ProfiloPageState extends State<ProfiloPage> {
                                         );
                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                       }else*/{
-                                        if(etaController.text=="" || (int.parse(etaController.text)>90 || int.parse(etaController.text)<16)){
+                                        if(etaController.text=="" || (int.parse(etaController.text)>113 || int.parse(etaController.text)<16)){
                                           const snackBar = SnackBar(
-                                            content: Text("Insert an age between 16 and 90 years"),
+                                            content: Text("Insert an age between 16 and 113 years"),
                                           );
                                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                         }else{
@@ -382,7 +389,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           //utenteMod.peso= double.parse(pesoController.text);        //se valide ricalcolo kcal e nutrienti in base ai dati forniti
                                           //utenteMod.altezza= int.parse(altezzaController.text);
                                           utenteMod.sesso=genere;
-                                          utenteMod.stile=stile;
+                                          utenteMod.intolleranze=intolleranze;
                                           updateUtente(utenteMod);
                                           const snackBar = SnackBar(                    //modifico utente
                                             content: Text('User data updated'),
@@ -392,9 +399,6 @@ class ProfiloPageState extends State<ProfiloPage> {
                                         }
                                       }
                                     }
-
-
-
                               },
                             ),
                           ),
@@ -433,7 +437,7 @@ class ProfiloPageState extends State<ProfiloPage> {
     docUtente.update({
       'nome': utente.nome,
       'cognome': utente.cognome,
-      'stile': utente.stile,
+      'intolleranze': utente.intolleranze,
       'sesso': utente.sesso,
       'eta': utente.eta,
     });

@@ -80,20 +80,6 @@ class RegisterPageState extends State<RegisterPage> {
                         width:35,
                         child: Image(image: AssetImage('assets/images/greenbar.jpeg'))),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: SizedBox(
-                        height: 15,
-                        width:35,
-                        child: Image(image: AssetImage('assets/images/greenbar.jpeg'))),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: SizedBox(
-                        height: 15,
-                        width:35,
-                        child: Image(image: AssetImage('assets/images/greenbar.jpeg'))),
-                  ),
                 ],
               ),
 
@@ -108,7 +94,7 @@ class RegisterPageState extends State<RegisterPage> {
               ),
               const Center(child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                child: Text('Last step!',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
+                child: Text('Last step',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold)),
               )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -116,7 +102,7 @@ class RegisterPageState extends State<RegisterPage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: MultiValidator([                                 //autovalidazione email
                     RequiredValidator(errorText: "* Required!"),
-                    EmailValidator(errorText: "Insert a valid e-mail"),
+                    EmailValidator(errorText: "Insert a valid email"),
                   ]),
                   controller: emailController,
                   decoration: InputDecoration(
@@ -126,7 +112,7 @@ class RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     errorBorder: OutlineInputBorder(
@@ -158,7 +144,7 @@ class RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     errorBorder: OutlineInputBorder(
@@ -182,7 +168,7 @@ class RegisterPageState extends State<RegisterPage> {
                       return "* Required";
                     }
                     if(val != passwordController.text) {
-                      return "Passwords don't match!";
+                      return "Passwords don't match";
                     }
                     return null;
                   },
@@ -195,7 +181,7 @@ class RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(35),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 2, color: Colors.green),
+                      borderSide: const BorderSide(width: 2, color: Colors.blue),
                       borderRadius: BorderRadius.circular(35),
                     ),
                     errorBorder: OutlineInputBorder(
@@ -226,7 +212,7 @@ class RegisterPageState extends State<RegisterPage> {
                       child: const Padding(
                         padding: EdgeInsets.all(9.0),
                         child: Text(
-                          "REGISTER NOW!",
+                          "REGISTER",
                           style: TextStyle(
                             fontSize: 24,
                           ),
@@ -284,7 +270,7 @@ class RegisterPageState extends State<RegisterPage> {
                             if (e.code == 'weak-password') {
                             } else if (e.code == 'email-already-in-use') {
                               const snackBar = SnackBar(                        //se email già in uso snackbar
-                                content: Text("That's e-mail is already used!"),
+                                content: Text("This email is already used!"),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             }

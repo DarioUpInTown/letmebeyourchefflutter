@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
             await FirebaseAuth.instance.signOut();
           },
         ),
-        title: const Text("Welcome to LetMeBeYourChef!", style: TextStyle(fontSize: 18),),
+        title: const Text("LetMeBeYourChef!", style: TextStyle(fontSize: 18),),
         actions: [
           IconButton(
             icon: const Icon(Icons.portrait),
@@ -173,7 +173,7 @@ class _HomeState extends State<Home> {
                         height: 10,
                       ),
                       Text(
-                        "Let's Cook Something New!",
+                        "Maybe you'd like... pizza?",
                         style: TextStyle(fontSize: 20, color: Colors.white),
                       )
                     ],
@@ -241,6 +241,28 @@ class _HomeState extends State<Home> {
                                             ],
                                           ),
                                         )),
+                                  ),
+                                  Positioned(
+                                    left: 0,
+                                    height: 40,
+                                    width: 80,
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.cyanAccent,
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(10),
+                                                bottomRight: Radius.circular(10)
+                                            )
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text("Like it  "),
+                                              Icon(Icons.favorite, size: 15,),
+                                            ],
+                                          ),
+                                        )),
                                   )
                                 ],
                               ),
@@ -301,11 +323,6 @@ class _HomeState extends State<Home> {
                         );
                       }),
                 )
-
-
-
-
-
 
               ],
             ),

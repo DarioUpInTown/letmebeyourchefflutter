@@ -57,20 +57,6 @@ class EtaPageState extends State<EtaPage> {
                   child: SizedBox(
                       height: 15,
                       width:35,
-                      child: Image(image: AssetImage('assets/images/greenbar.jpeg'))),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: SizedBox(
-                      height: 15,
-                      width:35,
-                      child: Image(image: AssetImage('assets/images/greenbar.jpeg'))),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: SizedBox(
-                      height: 15,
-                      width:35,
                       child: Image(image: AssetImage('assets/images/greybar.jpeg'))),
                 ),
               ],
@@ -104,14 +90,14 @@ class EtaPageState extends State<EtaPage> {
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(width: 2, color: Colors.orange),
+                              borderSide: const BorderSide(width: 2, color: Colors.blue),
                               borderRadius: BorderRadius.circular(35),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: const BorderSide(width: 2, color: Colors.orange),
                               borderRadius: BorderRadius.circular(35),
                             ),
-                            labelText: 'Age: 16-90 years old',
+                            labelText: 'Age: 16-113 years old',
                           ),
                         ),
                       ),
@@ -135,19 +121,19 @@ class EtaPageState extends State<EtaPage> {
                             onPressed: () {
                               if(etaController.text==""){
                                 const snackBar = SnackBar(
-                                  content: Text("Inserisci un eta tra 16 e 90 anni"),
+                                  content: Text("Insert an age between 16 and 113 years"),
                                 );
                                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }else{
                                 int eta= int.parse(etaController.text);                             //Validazione form
-                                if(eta<=90 && eta>=16){
+                                if(eta<=113 && eta>=16){
                                   widget.utente.eta=eta;
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => RegisterPage(utente: widget.utente),));
 
                                 }else{
                                   const snackBar = SnackBar(
-                                    content: Text("Insert an age beetween 16 and 60"),
+                                    content: Text("Insert an age between 16 and 113 years"),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
