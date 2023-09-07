@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 class RecipeModel
 {
+  static late String appuri;
   late String applabel;
   late String appimgUrl;
   late double appcalories;
@@ -12,7 +16,7 @@ class RecipeModel
         applabel: recipe["label"],
         appcalories: recipe["calories"],
         appimgUrl: recipe["image"],
-        appurl: recipe["url"]
+        appurl: recipe["url"],
     );
   }
 }

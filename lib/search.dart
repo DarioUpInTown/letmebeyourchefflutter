@@ -39,7 +39,7 @@ class _SearchState extends State<Search> {
 
 
     recipeList.forEach((Recipe) {
-      print(Recipe.applabel);
+      //print(Recipe.applabel);
       print(Recipe.appcalories);
     });
   }

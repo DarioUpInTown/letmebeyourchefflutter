@@ -5,6 +5,7 @@ import 'package:LetMeBeYourChefFlutter/Model/utente.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'RecipeView.dart';
 import 'model.dart';
 import 'search.dart';
@@ -28,7 +29,6 @@ class _HomeState extends State<Home> {
   TextEditingController searchController = new TextEditingController();
   List reciptCatList = [{"imgUrl": "https://www.thesun.co.uk/wp-content/uploads/2020/08/NINTCHDBPICT000603046726.jpg?w=1280&quality=44", "heading": "Italian Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://www.lospicchiodaglio.it/img/news/sapete-cos-e-il-junk-food.jpg", "heading": "USA Food"},{"imgUrl": "https://cdn.tasteatlas.com//images/toplistarticles/8cc45833c34a4bc99d85375ecfde18f6.jpg?mw=1300", "heading": "Oriental Food"}];
 
-
   getRecipes(String query) async {
     String url =
         "https://api.edamam.com/search?q=$query&app_id=d6514d39&app_key=40431e11d35ff909597ab69b1b0e04f9";
@@ -46,7 +46,6 @@ class _HomeState extends State<Home> {
       });
     });
 
-
     recipeList.forEach((Recipe) {
       print(Recipe.applabel);
       print(Recipe.appcalories);
@@ -54,7 +53,6 @@ class _HomeState extends State<Home> {
   }
   @override
   void initState() {
-
 
     if (FirebaseAuth.instance.currentUser != null) {
       for (final providerProfile in FirebaseAuth.instance.currentUser!.providerData) {
@@ -64,11 +62,11 @@ class _HomeState extends State<Home> {
     var now=DateTime.now();
     data= '${now.day}-${now.month}-${now.year}';
     super.initState();
-    getRecipes("pizza");
+    getRecipes("Pizza");
 
   }
   Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
-    final docUtente = FirebaseFirestore.instance.collection('UtenteFL').doc(email);
+    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(email);
     final snapshot= await docUtente.get();
     if(snapshot.exists){
       return Utente.fromMap(snapshot.data()!);
@@ -76,10 +74,8 @@ class _HomeState extends State<Home> {
     return null;
   }
   late Utente? utente= null;
-  late int kcal=0;
-  late double fat=0;
-  late double carboidrati=0;
-  late double pro=0;
+  bool isRecipeFavorite = false;
+  IconData favoriteIcon = Icons.favorite_border;
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +240,8 @@ class _HomeState extends State<Home> {
                                   ),
                                   Positioned(
                                     left: 0,
-                                    height: 40,
-                                    width: 80,
+                                    height: 50,
+                                    width: 60,
                                     child: Container(
                                         decoration: BoxDecoration(
                                             color: Colors.cyanAccent,
@@ -258,8 +254,94 @@ class _HomeState extends State<Home> {
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
-                                              Text("Like it  "),
-                                              Icon(Icons.favorite, size: 15,),
+                                              IconButton(
+                                                icon: Icon(
+                                                    Icons.favorite_border
+                                                ), onPressed: () async {
+                                                // Ottiene l'ID dell'utente autenticato
+                                                String? userId = FirebaseAuth
+                                                    .instance.currentUser
+                                                    ?.email;
+
+                                                // ID della ricetta da rimuovere
+                                                String recipeId = RecipeModel.appuri;
+
+                                                // Riferimento al documento dell'utente nella collezione
+                                                DocumentReference userDocRef = FirebaseFirestore.instance
+                                                    .collection('Utente')
+                                                    .doc(userId);
+
+                                                // Riferimento alla collezione delle ricette preferite dell'utente
+                                                CollectionReference favoriteRecipesCollectionRef = userDocRef.collection('Favourite recipes FL');
+
+                                                // Esegui una query per cercare la ricetta specifica tra i preferiti dell'utente
+                                                QuerySnapshot querySnapshot = await favoriteRecipesCollectionRef
+                                                    .where('recipeId', isEqualTo: recipeId)
+                                                    .get();
+
+                                                if (querySnapshot.docs.isNotEmpty) {
+                                                  // La ricetta è presente tra i preferiti dell'utente
+
+                                                  // Ottieni il riferimento al documento della ricetta da rimuovere
+                                                  DocumentReference recipeToRemoveRef = querySnapshot.docs[0].reference;
+
+                                                  // Esegui la rimozione della ricetta dalla collezione dei preferiti
+                                                  await recipeToRemoveRef.delete();
+
+                                                  setState(() {
+                                                    icon: Icons.favorite_border; // Cambia l'icona a "non preferito"
+                                                  });
+                                                }else {
+                                                  // Aggiunge la ricetta preferita alla collezione "favoriteRecipes" di Firestore
+                                                  FirebaseFirestore.instance
+                                                      .collection(
+                                                      'Utente')
+                                                      .doc(userId) // Usa l'ID dell'utente come ID del documento
+                                                      .collection('Favourite recipes FL')
+                                                      .add({'recipeName': RecipeModel.appuri,
+                                                    // Sostituisci con il nome della tua ricetta
+                                                  }).then((value) {
+                                                    setState(() {
+                                                     icon : Icons.favorite; // Cambia l'icona a "non preferito"
+                                                    });
+                                                    Fluttertoast.showToast(
+                                                      msg: 'La ricetta è stata aggiunta ai preferiti!',
+                                                      toastLength: Toast
+                                                          .LENGTH_SHORT,
+                                                      // Puoi cambiare la durata del toast
+                                                      gravity: ToastGravity
+                                                          .BOTTOM,
+                                                      // Posizione del toast
+                                                      timeInSecForIosWeb: 1,
+                                                      // Durata del toast per iOS/Web
+                                                      backgroundColor: Colors
+                                                          .green,
+                                                      // Colore di sfondo del toast
+                                                      textColor: Colors
+                                                          .white, // Colore del testo del toast
+                                                    );
+                                                  }).catchError((error) {
+                                                    // Gestisci eventuali errori durante l'aggiunta
+                                                    Fluttertoast.showToast(
+                                                      msg: 'Errore durante l\'aggiunta della ricetta preferita: $error',
+                                                      toastLength: Toast
+                                                          .LENGTH_SHORT,
+                                                      // Puoi cambiare la durata del toast
+                                                      gravity: ToastGravity
+                                                          .BOTTOM,
+                                                      // Posizione del toast
+                                                      timeInSecForIosWeb: 1,
+                                                      // Durata del toast per iOS/Web
+                                                      backgroundColor: Colors
+                                                          .green,
+                                                      // Colore di sfondo del toast
+                                                      textColor: Colors
+                                                          .white, // Colore del testo del toast
+                                                    );
+                                                  });
+                                                }
+                                              },
+                                              )
                                             ],
                                           ),
                                         )),
@@ -277,6 +359,7 @@ class _HomeState extends State<Home> {
                       itemBuilder: (context, index){
 
                         return Container(
+                            width: 300,
                             child: InkWell(
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => Search(reciptCatList[index]["heading"])));
