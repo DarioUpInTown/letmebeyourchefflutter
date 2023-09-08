@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'FavouriteRecipesScreen.dart';
+import 'FavouriteRecipesScreen22.dart';
 import 'RecipeView.dart';
 import 'model.dart';
 import 'search.dart';
@@ -26,7 +27,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Page _currentPage = Page.Home; // Inizialmente impostato su "Home"
   late String data = '';
   late String email='';
 
@@ -35,15 +35,9 @@ class _HomeState extends State<Home> {
   TextEditingController searchController = new TextEditingController();
   List reciptCatList = [{"imgUrl": "https://www.thesun.co.uk/wp-content/uploads/2020/08/NINTCHDBPICT000603046726.jpg?w=1280&quality=44", "heading": "Italian Food"},{"imgUrl": "https://images.unsplash.com/photo-1593560704563-f176a2eb61db", "heading": "Chilli Food"},{"imgUrl": "https://www.lospicchiodaglio.it/img/news/sapete-cos-e-il-junk-food.jpg", "heading": "USA Food"},{"imgUrl": "https://cdn.tasteatlas.com//images/toplistarticles/8cc45833c34a4bc99d85375ecfde18f6.jpg?mw=1300", "heading": "Oriental Food"}];
 
-  void _changePage(Page page) {
-    setState(() {
-      _currentPage = page;
-    });
-  }
-
   getRecipes(String query) async {
     String url =
-        "https://api.edamam.com/search?q=$query&app_id=d6514d39&app_key=40431e11d35ff909597ab69b1b0e04f9";
+        "https://api.edamam.com/search?q=$query&app_id=78cafba0&app_key=00863f5f7cb2ac7a14ce8823fc156279";
     Response response = await get(Uri.parse(url));
     Map data = jsonDecode(response.body);
     setState(() {
@@ -75,7 +69,6 @@ class _HomeState extends State<Home> {
     data= '${now.day}-${now.month}-${now.year}';
     super.initState();
     getRecipes("Pizza");
-
   }
   Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
     final docUtente = FirebaseFirestore.instance.collection('Utente').doc(email);
@@ -486,15 +479,9 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-
         ],
       ),
     );
-  }
-  Future creaUtente({required Utente utente}) async{                                        //Funzione crea utente
-    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(utente.email);
-    await docUtente.set(utente.toMap());
-
   }
 
   QuerySnapshot checkRecipeFav({required String recipeUri})  {
