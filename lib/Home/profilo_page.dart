@@ -364,19 +364,7 @@ class ProfiloPageState extends State<ProfiloPage> {
                                       content: Text("Insert a last name"),
                                     );
                                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  }else/*{
-                                    if(altezzaController.text=='' || (int.parse(altezzaController.text)>200 || int.parse(altezzaController.text)<130)){
-                                      const snackBar = SnackBar(
-                                        content: Text("Inserisci un'altezza tra 130 e 200 cm"),
-                                      );
-                                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                    }else{
-                                      if(pesoController.text=="" || (double.parse(pesoController.text)>200 || double.parse(pesoController.text)<40)){
-                                        const snackBar = SnackBar(
-                                          content: Text("Inserisci un peso tra 40 e 200 kg"),
-                                        );
-                                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                      }else*/{
+                                  }else{
                                         if(etaController.text=="" || (int.parse(etaController.text)>113 || int.parse(etaController.text)<16)){
                                           const snackBar = SnackBar(
                                             content: Text("Insert an age between 16 and 113 years"),
@@ -386,8 +374,6 @@ class ProfiloPageState extends State<ProfiloPage> {
                                           utenteMod.nome = nomeController.text;
                                           utenteMod.cognome= cognomeController.text;
                                           utenteMod.eta= int.parse(etaController.text);
-                                          //utenteMod.peso= double.parse(pesoController.text);        //se valide ricalcolo kcal e nutrienti in base ai dati forniti
-                                          //utenteMod.altezza= int.parse(altezzaController.text);
                                           utenteMod.sesso=genere;
                                           utenteMod.intolleranze=intolleranze;
                                           updateUtente(utenteMod);
@@ -425,7 +411,7 @@ class ProfiloPageState extends State<ProfiloPage> {
     );
   }
    Future<Utente?> readUtente() async {                                       //leggo i dati dell'utente
-     final docUtente = FirebaseFirestore.instance.collection('Utente').doc(email);
+     final docUtente = FirebaseFirestore.instance.collection('Flutter').doc(email);
      final snapshot= await docUtente.get();
      if(snapshot.exists){
        return Utente.fromMap(snapshot.data()!);
@@ -433,7 +419,7 @@ class ProfiloPageState extends State<ProfiloPage> {
      return null;
   }                                                                     //modifico i dati dell'utente
   Future updateUtente(Utente utente) async {
-    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(utente.email);
+    final docUtente = FirebaseFirestore.instance.collection('Flutter').doc(utente.email);
     docUtente.update({
       'nome': utente.nome,
       'cognome': utente.cognome,

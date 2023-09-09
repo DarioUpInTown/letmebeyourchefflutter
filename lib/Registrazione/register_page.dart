@@ -251,7 +251,7 @@ class RegisterPageState extends State<RegisterPage> {
     );
   }
   Future creaUtente({required Utente utente}) async{                                        //Funzione crea utente
-    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(utente.email);
+    final docUtente = FirebaseFirestore.instance.collection('Flutter').doc(utente.email);
     await docUtente.set(utente.toMap());
 
   }

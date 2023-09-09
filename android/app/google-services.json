@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22541716063",
+    "project_id": "letmebeyourchefflutter",
+    "storage_bucket": "letmebeyourchefflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22541716063:android:53c5906de4e1df8bc029ea",
+        "android_client_info": {
+          "package_name": "com.example.letmebeyourchefflutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5JDa3unzPAcKAJPH7KwPr-MO1IaQtJj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

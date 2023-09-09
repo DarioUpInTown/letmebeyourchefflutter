@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'RecipeView.dart';
-import 'model.dart';
+import 'Model/recipeModel.dart';
 import 'package:http/http.dart';
 
 
@@ -246,7 +246,7 @@ class _SearchState extends State<Search> {
 
                                                 // Riferimento al documento dell'utente nella collezione
                                                 DocumentReference userDocRef = FirebaseFirestore.instance
-                                                    .collection('Utente')
+                                                    .collection('Flutter')
                                                     .doc(email);
 
                                                 // Riferimento alla specifica ricetta della collezione delle ricette preferite dell'utente
@@ -308,7 +308,7 @@ class _SearchState extends State<Search> {
                                                 }else {
                                                   // Aggiunge la ricetta preferita alla collezione "favoriteRecipes" di Firestore
                                                   FirebaseFirestore.instance
-                                                      .collection('Utente')
+                                                      .collection('Flutter')
                                                       .doc(email) // Usa l'ID dell'utente come ID del documento
                                                       .collection('Ricette preferite FL')
                                                       .doc(recipeList[index].applabel)
@@ -379,7 +379,7 @@ class _SearchState extends State<Search> {
   Future<bool> isRecipeInFirestore({required String recipeUri}) async {
     // Esegui una query sulla collezione delle ricette con il campo ID della ricetta
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
-        .collection('Utente')
+        .collection('Flutter')
         .doc(email)
         .collection('Ricette preferite FL')
         .where('recipeUri', isEqualTo: recipeUri)

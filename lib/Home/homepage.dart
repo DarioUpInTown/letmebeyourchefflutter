@@ -8,11 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'FavouriteRecipesScreen.dart';
-import 'FavouriteRecipesScreen22.dart';
-import 'RecipeView.dart';
-import 'model.dart';
-import 'search.dart';
+import '../FavouriteRecipesScreen.dart';
+import '../RecipeView.dart';
+import '../Model/recipeModel.dart';
+import '../search.dart';
 import 'package:http/http.dart';
 
 enum Page { Home, Preferite }
@@ -71,7 +70,7 @@ class _HomeState extends State<Home> {
     getRecipes("Pizza");
   }
   Future<Utente?> readUtente() async {                                                    //leggo dati utente per kcal e nutrienti
-    final docUtente = FirebaseFirestore.instance.collection('Utente').doc(email);
+    final docUtente = FirebaseFirestore.instance.collection('Flutter').doc(email);
     final snapshot= await docUtente.get();
     if(snapshot.exists){
       return Utente.fromMap(snapshot.data()!);
@@ -300,7 +299,7 @@ class _HomeState extends State<Home> {
 
                                                 // Riferimento al documento dell'utente nella collezione
                                                 DocumentReference userDocRef = FirebaseFirestore.instance
-                                                    .collection('Utente')
+                                                    .collection('Flutter')
                                                     .doc(email);
 
                                                 // Riferimento alla specifica ricetta della collezione delle ricette preferite dell'utente
@@ -362,7 +361,7 @@ class _HomeState extends State<Home> {
                                                 }else {
                                                   // Aggiunge la ricetta preferita alla collezione "favoriteRecipes" di Firestore
                                                   FirebaseFirestore.instance
-                                                      .collection('Utente')
+                                                      .collection('Flutter')
                                                       .doc(email) // Usa l'ID dell'utente come ID del documento
                                                       .collection('Ricette preferite FL')
                                                       .doc(recipeList[index].applabel)
@@ -414,6 +413,34 @@ class _HomeState extends State<Home> {
                                           ),
                                         )),
                                   )
+
+
+                                 /* Positioned(
+                                    top: 0,
+                                    right:0,
+                                    height: 20,
+                                    width: 60,
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.blueAccent,
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(10),
+                                                bottomLeft: Radius.circular(10)
+                                            )
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.add_box, size: 40,),
+                                              //Text(recipeList[index].appcalories.toString().substring(0, 6)),
+                                            ],
+                                          ),
+                                        )),
+                                  ), */
+
+
+
                                 ],
                               ),
                             ),
@@ -488,7 +515,7 @@ class _HomeState extends State<Home> {
 
     // Riferimento al documento dell'utente nella collezione
     DocumentReference userDocRef = FirebaseFirestore.instance
-        .collection('Utente')
+        .collection('Flutter')
         .doc(email);
 
     // Riferimento alla specifica ricetta della collezione delle ricette preferite dell'utente
@@ -509,7 +536,7 @@ class _HomeState extends State<Home> {
   Future<bool> isRecipeInFirestore({required String recipeUri}) async {
     // Esegui una query sulla collezione delle ricette con il campo ID della ricetta
     QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
-        .collection('Utente')
+        .collection('Flutter')
         .doc(email)
         .collection('Ricette preferite FL')
         .where('recipeUri', isEqualTo: recipeUri)

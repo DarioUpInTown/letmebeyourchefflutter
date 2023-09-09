@@ -44,46 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBAiFPuf9n7o_PztO7A6Q7eRfmHlMtbbRE',
-    appId: '1:161508747965:web:abda1c815828b29a5265d4',
-    messagingSenderId: '161508747965',
-    projectId: 'letmebeyourchef-efbaa',
-    authDomain: 'letmebeyourchef-efbaa.firebaseapp.com',
-    databaseURL: 'https://letmebeyourchef-efbaa-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'letmebeyourchef-efbaa.appspot.com',
-    measurementId: 'G-Z14J81W702',
+    apiKey: 'AIzaSyCKnnYROBXzhPBppnW8zCfCb22UsFIUCWE',
+    appId: '1:22541716063:web:fc4712766fd0f7a0c029ea',
+    messagingSenderId: '22541716063',
+    projectId: 'letmebeyourchefflutter',
+    authDomain: 'letmebeyourchefflutter.firebaseapp.com',
+    storageBucket: 'letmebeyourchefflutter.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC6gyyrFziUrhowG-6deokCg4nCcA2dXIM',
-    appId: '1:161508747965:android:2ee9e45c5359398e5265d4',
-    messagingSenderId: '161508747965',
-    projectId: 'letmebeyourchef-efbaa',
-    databaseURL: 'https://letmebeyourchef-efbaa-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'letmebeyourchef-efbaa.appspot.com',
+    apiKey: 'AIzaSyD5JDa3unzPAcKAJPH7KwPr-MO1IaQtJj4',
+    appId: '1:22541716063:android:53c5906de4e1df8bc029ea',
+    messagingSenderId: '22541716063',
+    projectId: 'letmebeyourchefflutter',
+    storageBucket: 'letmebeyourchefflutter.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBjjmq7qTdzrBGWHslAKTXG5VXpDySrgE4',
-    appId: '1:161508747965:ios:af127f56560ff5a65265d4',
-    messagingSenderId: '161508747965',
-    projectId: 'letmebeyourchef-efbaa',
-    databaseURL: 'https://letmebeyourchef-efbaa-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'letmebeyourchef-efbaa.appspot.com',
-    androidClientId: '161508747965-um4gbin56kq8rrgb8jhpva1nm83vpop1.apps.googleusercontent.com',
-    iosClientId: '161508747965-3m8qch7d6svkg6gd2abbmt1vf8v9pjq9.apps.googleusercontent.com',
-    iosBundleId: 'com.example.letmebeyourchefflutter.letmebeyourchefflutter',
+    apiKey: 'AIzaSyDIvOCUY2yU4yaAveD89kJDn_LDwFMZiFs',
+    appId: '1:22541716063:ios:a1c36da9692017a2c029ea',
+    messagingSenderId: '22541716063',
+    projectId: 'letmebeyourchefflutter',
+    storageBucket: 'letmebeyourchefflutter.appspot.com',
+    iosBundleId: 'com.example.letmebeyourchefflutter',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBjjmq7qTdzrBGWHslAKTXG5VXpDySrgE4',
-    appId: '1:161508747965:ios:c896380cbe0cf77b5265d4',
-    messagingSenderId: '161508747965',
-    projectId: 'letmebeyourchef-efbaa',
-    databaseURL: 'https://letmebeyourchef-efbaa-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'letmebeyourchef-efbaa.appspot.com',
-    androidClientId: '161508747965-um4gbin56kq8rrgb8jhpva1nm83vpop1.apps.googleusercontent.com',
-    iosClientId: '161508747965-g7bn1i686hqngr8c4pohtm715bdrl8kr.apps.googleusercontent.com',
-    iosBundleId: 'com.example.letmebeyourchefflutter.letmebeyourchefflutter.RunnerTests',
+    apiKey: 'AIzaSyDIvOCUY2yU4yaAveD89kJDn_LDwFMZiFs',
+    appId: '1:22541716063:ios:4d262d584725c471c029ea',
+    messagingSenderId: '22541716063',
+    projectId: 'letmebeyourchefflutter',
+    storageBucket: 'letmebeyourchefflutter.appspot.com',
+    iosBundleId: 'com.example.letmebeyourchefflutter.RunnerTests',
   );
 }
