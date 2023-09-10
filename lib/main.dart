@@ -2,16 +2,17 @@
 
 import 'dart:async';
 
+import 'package:LetMeBeYourChefFlutter/Home/homepage.dart';
 import 'package:LetMeBeYourChefFlutter/Registrazione/nome_page.dart';
 import 'package:LetMeBeYourChefFlutter/inizio_page.dart';
 import 'package:LetMeBeYourChefFlutter/login_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // ignore: depend_on_referenced_packages
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:LetMeBeYourChefFlutter/Home/homepage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

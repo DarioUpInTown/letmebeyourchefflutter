@@ -1,18 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:LetMeBeYourChefFlutter/Home/profilo_page.dart';
 import 'package:LetMeBeYourChefFlutter/Model/utente.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../FavouriteRecipesScreen.dart';
-import '../RecipeView.dart';
-import '../Model/recipeModel.dart';
-import '../search.dart';
 import 'package:http/http.dart';
+
+import '../FavouriteRecipesScreen.dart';
+import '../Model/recipeModel.dart';
+import '../RecipeView.dart';
+import '../search.dart';
 
 enum Page { Home, Preferite }
 
